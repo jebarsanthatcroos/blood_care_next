@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+.git
+.gitignore
+firebase-debug.log
+serviceAccountKey.json
+npm-debug.log*
+Dockerfile
+docker-compose*.yml
