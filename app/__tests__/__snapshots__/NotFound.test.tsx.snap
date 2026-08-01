@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`NotFound Component Snapshot Testing matches snapshot 1`] = `
+<div>
+  <main
+    class="relative min-h-screen bg-[#03060F] overflow-hidden flex items-center justify-center"
+  >
+    <div
+      class="absolute inset-0 opacity-[0.02] pointer-events-none"
+      style="background-image: linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px); background-size: 40px 40px;"
+    />
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-100 pointer-events-none"
+      style="background: radial-gradient(ellipse, #E11D2E15 0%, transparent 65%);"
+    />
+    <section
+      class="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 py-32 text-center"
+    >
+      <span
+        animate="[object Object]"
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF3C6E]/10 border border-[#FF3C6E]/20 text-[#FF3C6E] text-sm font-medium mb-6"
+        initial="[object Object]"
+      >
+        <div
+          data-testid="icon-heartbeat"
+        />
+        Page not found
+      </span>
+      <div
+        animate="[object Object]"
+        class="relative w-24 h-24 mx-auto mb-8 rounded-2xl bg-white/3 border border-white/10 flex items-center justify-center"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        <div
+          data-testid="icon-tint"
+        />
+        <div
+          animate="[object Object]"
+          class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-[#03060F] border border-white/10 flex items-center justify-center"
+          transition="[object Object]"
+        >
+          <div
+            data-testid="icon-search"
+          />
+        </div>
+      </div>
+      <h1
+        animate="[object Object]"
+        class="text-5xl sm:text-7xl font-black text-white leading-tight mb-4"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        4
+        <span
+          class="bg-linear-to-r from-[#E11D2E] via-[#FF3C6E] to-[#7B2FFF] bg-clip-text text-transparent"
+        >
+          0
+        </span>
+        4
+      </h1>
+      <p
+        animate="[object Object]"
+        class="text-gray-400 text-lg max-w-md mx-auto mb-10"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        This page went missing, but lives are still being saved every minute. Let's get you back on track.
+      </p>
+      <div
+        animate="[object Object]"
+        class="flex flex-col sm:flex-row items-center justify-center gap-4"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        <a
+          data-testid="link-home"
+          href="/"
+        >
+          <button
+            class="flex items-center gap-2 px-8 py-3.5 rounded-lg bg-linear-to-r from-[#E11D2E] to-[#7B2FFF] text-white font-bold shadow-lg hover:shadow-[#E11D2E]/40 transition-all"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <div
+              data-testid="icon-home"
+            />
+            Back to Home
+          </button>
+        </a>
+        <a
+          data-testid="link-donate"
+          href="/donate"
+        >
+          <button
+            class="flex items-center gap-2 px-8 py-3.5 rounded-lg border border-white/10 text-gray-300 hover:text-white hover:bg-white/5 font-medium transition-all"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            Donate Now
+            <div
+              data-testid="icon-arrow-right"
+            />
+          </button>
+        </a>
+      </div>
+    </section>
+  </main>
+</div>
+`;
