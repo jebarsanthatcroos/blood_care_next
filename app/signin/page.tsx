@@ -18,7 +18,7 @@ import {
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 
-import { auth, googleProvider, githubProvider } from '../../lib/firebase';
+import { getFirebaseAuth, getFirebaseProviders } from '../../lib/firebase';
 import { useLanguage } from '../../lib/language';
 
 import { FcGoogle } from 'react-icons/fc';
@@ -194,7 +194,10 @@ export default function SignInPage() {
   const { t } = useLanguage();
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
+    const firebaseAuth = getFirebaseAuth();
+    if (!firebaseAuth) return;
+
+    const unsub = onAuthStateChanged(firebaseAuth, (user) => {
       if (user) router.push('/');
     });
     return () => unsub();
@@ -226,10 +229,16 @@ export default function SignInPage() {
   };
 
   async function handleOAuth(provider: AuthProvider) {
+    const firebaseAuth = getFirebaseAuth();
+    if (!firebaseAuth) {
+      setError(t('signInFailed'));
+      return;
+    }
+
     setError('');
     setLoading(true);
     try {
-      await signInWithPopup(auth, provider);
+      await signInWithPopup(firebaseAuth, provider);
     } catch (e: unknown) {
       if (e instanceof FirebaseError && e.code === 'auth/operation-not-allowed') {
         setError(t('oauthNotEnabled'));
@@ -244,11 +253,17 @@ export default function SignInPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validateForm()) return;
+
+    const firebaseAuth = getFirebaseAuth();
+    if (!firebaseAuth) {
+      setError(t('signInFailed'));
+      return;
+    }
     
     setError('');
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(firebaseAuth, email, password);
       router.push('/');
     } catch (e: unknown) {
       if (e instanceof FirebaseError) {
@@ -274,6 +289,12 @@ export default function SignInPage() {
   }
 
   async function handleForgotPassword() {
+    const firebaseAuth = getFirebaseAuth();
+    if (!firebaseAuth) {
+      setError(t('signInFailed'));
+      return;
+    }
+
     if (!email.trim()) {
       setError(t('enterEmailAboveForgotPassword'));
       return;
@@ -281,7 +302,7 @@ export default function SignInPage() {
     setError('');
     setResetLoading(true);
     try {
-      await sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(firebaseAuth, email);
       setResetSent(true);
       setTimeout(() => setResetSent(false), 5000);
     } catch (e: unknown) {
@@ -339,7 +360,14 @@ export default function SignInPage() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="button"
-              onClick={() => handleOAuth(googleProvider)}
+              onClick={() => {
+                const providers = getFirebaseProviders();
+                if (!providers.googleProvider) {
+                  setError(t('signInFailed'));
+                  return;
+                }
+                handleOAuth(providers.googleProvider);
+              }}
               disabled={loading}
               className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2.5 text-sm font-medium text-gray-300 transition hover:bg-white/10 hover:border-white/20 disabled:opacity-50"
             >
@@ -350,7 +378,14 @@ export default function SignInPage() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="button"
-              onClick={() => handleOAuth(githubProvider)}
+              onClick={() => {
+                const providers = getFirebaseProviders();
+                if (!providers.githubProvider) {
+                  setError(t('signInFailed'));
+                  return;
+                }
+                handleOAuth(providers.githubProvider);
+              }}
               disabled={loading}
               className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2.5 text-sm font-medium text-gray-300 transition hover:bg-white/10 hover:border-white/20 disabled:opacity-50"
             >

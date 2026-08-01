@@ -17,7 +17,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
-import { auth, db, googleProvider, githubProvider } from '../../lib/firebase';
+import { getFirebaseAuth, getFirebaseDb, getFirebaseProviders } from '../../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 
 import { FcGoogle } from 'react-icons/fc';
@@ -230,7 +230,10 @@ export default function SignUpPage() {
 
   // Redirect if already signed in
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
+    const firebaseAuth = getFirebaseAuth();
+    if (!firebaseAuth) return;
+
+    const unsub = onAuthStateChanged(firebaseAuth, (user) => {
       if (user) router.push('/');
     });
     return () => unsub();
@@ -280,10 +283,16 @@ export default function SignUpPage() {
   };
 
   async function handleOAuth(provider: AuthProvider) {
+    const firebaseAuth = getFirebaseAuth();
+    if (!firebaseAuth) {
+      setError(t('registration_failed'));
+      return;
+    }
+
     setError('');
     setLoading(true);
     try {
-      await signInWithPopup(auth, provider);
+      await signInWithPopup(firebaseAuth, provider);
     } catch (e: unknown) {
       if (e instanceof FirebaseError && e.code === 'auth/operation-not-allowed') {
         setError(t('oauthNotEnabled'));
@@ -299,15 +308,27 @@ export default function SignUpPage() {
     e.preventDefault();
     if (!validateForm()) return;
 
+    const firebaseAuth = getFirebaseAuth();
+    if (!firebaseAuth) {
+      setError(t('registration_failed'));
+      return;
+    }
+
+    const firebaseDb = getFirebaseDb();
+    if (!firebaseDb) {
+      setError(t('registration_failed'));
+      return;
+    }
+
     setLoading(true);
     setError('');
     
     try {
-      const cred = await createUserWithEmailAndPassword(auth, form.email, form.password);
+      const cred = await createUserWithEmailAndPassword(firebaseAuth, form.email, form.password);
       await updateProfile(cred.user, { displayName: form.username });
 
       // Persist additional user data to Firestore
-      await setDoc(doc(db, 'users', cred.user.uid), {
+      await setDoc(doc(firebaseDb, 'users', cred.user.uid), {
         username: form.username,
         email: form.email,
         country: form.country,
@@ -393,7 +414,14 @@ export default function SignUpPage() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="button"
-              onClick={() => handleOAuth(googleProvider)}
+              onClick={() => {
+                const providers = getFirebaseProviders();
+                if (!providers.googleProvider) {
+                  setError(t('registration_failed'));
+                  return;
+                }
+                handleOAuth(providers.googleProvider);
+              }}
               disabled={loading}
               className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2.5 text-sm font-medium text-gray-300 transition hover:bg-white/10 hover:border-white/20 disabled:opacity-50"
             >
@@ -404,7 +432,14 @@ export default function SignUpPage() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="button"
-              onClick={() => handleOAuth(githubProvider)}
+              onClick={() => {
+                const providers = getFirebaseProviders();
+                if (!providers.githubProvider) {
+                  setError(t('registration_failed'));
+                  return;
+                }
+                handleOAuth(providers.githubProvider);
+              }}
               disabled={loading}
               className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2.5 text-sm font-medium text-gray-300 transition hover:bg-white/10 hover:border-white/20 disabled:opacity-50"
             >
