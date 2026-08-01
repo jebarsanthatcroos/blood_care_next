@@ -4,7 +4,7 @@
 export const dynamic = 'force-static';
 
 import React, { useEffect, useState } from 'react';
-import { auth, db } from '../lib/firebase';
+import { auth, db } from '../../lib/firebase';
 import { 
   onAuthStateChanged, 
   User, 

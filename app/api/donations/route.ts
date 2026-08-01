@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {Timestamp } from 'firebase-admin/firestore';
-import { getAdminAuth, getAdminDb } from '../../lib/firebase-admin';
-import { getRedis } from '../../lib/redis';
+import { getAdminAuth, getAdminDb } from '../../../lib/firebase-admin';
+import { getRedis } from '../../../lib/redis';
 
 export const dynamic = 'force-dynamic';
 

@@ -27,4 +27,5 @@ describe('firebase client initialization', () => {
 
     expect(() => require('./firebase')).not.toThrow();
   });
+
 });

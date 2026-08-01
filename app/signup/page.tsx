@@ -17,7 +17,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
-import { auth, db, googleProvider, githubProvider } from '../lib/firebase';
+import { auth, db, googleProvider, githubProvider } from '../../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 
 import { FcGoogle } from 'react-icons/fc';
@@ -32,7 +32,7 @@ import {
   HiOutlineUserAdd,
 } from 'react-icons/hi';
 import { RiErrorWarningLine, RiCheckboxCircleLine, RiHeartPulseLine } from 'react-icons/ri';
-import { useLanguage } from '../lib/language';
+import { useLanguage } from '../../lib/language';
 
 
 function AnimatedBackground() {

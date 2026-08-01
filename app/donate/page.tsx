@@ -15,9 +15,9 @@ import {
   FaCalendarAlt,
   FaLock,
 } from 'react-icons/fa';
-import { useAuth } from '../lib/useAuth';
-import { useLanguage } from '../lib/language';
-import { CLAY, SHADOW, usePressable } from '../lib/clay';
+import { useAuth } from '../../lib/useAuth';
+import { useLanguage } from '../../lib/language';
+import { CLAY, SHADOW, usePressable } from '../../lib/clay';
 
 const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaSpinner } from 'react-icons/fa';
-import { useAuth } from '../lib/useAuth';
+import { useAuth } from '../../lib/useAuth';
 
 function LoadingScreen({ label }: { label: string }) {
   return (
