@@ -42,3 +42,6 @@ next-env.d.ts
 
 
 serviceAccountKey.json
+
+# Local Netlify folder
+.netlify
