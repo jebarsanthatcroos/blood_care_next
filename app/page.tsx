@@ -17,7 +17,7 @@ import {
   FaQuoteLeft,
   FaCheckCircle,
 } from 'react-icons/fa';
-import { useLanguage } from './lib/language';
+import { useLanguage } from '../lib/language';
 
 const stats = [
   { icon: FaTint, label: 'Lives Saved', value: '2,400+' },

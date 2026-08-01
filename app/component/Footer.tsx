@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useInView, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { FaHeartbeat, FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from 'react-icons/fa';
-import { CLAY, SHADOW, usePressable } from '../lib/clay';
-import { useLanguage } from '../lib/language';
+import { CLAY, SHADOW, usePressable } from '../../lib/clay';
+import { useLanguage } from '../../lib/language';
 
 interface NavLink {
   label: string;

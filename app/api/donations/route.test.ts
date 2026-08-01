@@ -27,12 +27,12 @@ const createMockRequest = (headers?: Record<string, string>) => {
   return request as never;
 };
 
-jest.mock('../../lib/firebase-admin', () => ({
+jest.mock('@/lib/firebase-admin', () => ({
   getAdminAuth: () => ({ verifyIdToken }),
   getAdminDb: () => ({ collection: getCollection }),
 }));
 
-jest.mock('../../lib/redis', () => ({
+jest.mock('@/lib/redis', () => ({
   getRedis: () => getRedis(),
 }));
 
@@ -97,7 +97,7 @@ describe('donations API route', () => {
         get: (name: string) => (name.toLowerCase() === 'authorization' ? 'Bearer test-token' : null),
       },
       json: async () => ({
-        fullName: 'Jane Doe',
+        fullName: 'Jebarsan Thatcroos',
         bloodType: 'O+',
         phone: '0771234567',
         city: 'Colombo',
@@ -112,7 +112,7 @@ describe('donations API route', () => {
     const body = await response.json();
     expect(body).toMatchObject({ id: 'new-donor-id' });
     expect(add).toHaveBeenCalledWith(expect.objectContaining({
-      fullName: 'Jane Doe',
+      fullName: 'Jebarsan Thatcroos',
       email: 'test@example.com',
       status: 'pending',
     }));

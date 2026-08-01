@@ -18,8 +18,8 @@ import {
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 
-import { auth, googleProvider, githubProvider } from '../lib/firebase';
-import { useLanguage } from '../lib/language';
+import { auth, googleProvider, githubProvider } from '../../lib/firebase';
+import { useLanguage } from '../../lib/language';
 
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';

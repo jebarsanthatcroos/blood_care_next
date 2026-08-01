@@ -15,8 +15,8 @@ import {
 } from 'react-icons/fa';
 import { Timestamp } from 'firebase/firestore';
 import { AuthGuard } from '../component/RouteGuards';
-import { useAuth } from '../lib/useAuth';
-import { useLanguage } from '../lib/language';
+import { useAuth } from '../../lib/useAuth';
+import { useLanguage } from '../../lib/language';
 
 interface Donor {
   id: string;

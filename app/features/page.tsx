@@ -18,8 +18,8 @@ import {
 } from 'react-icons/fa';
 import { GiHeartOrgan } from 'react-icons/gi';
 import { MdBloodtype } from 'react-icons/md';
-import { CLAY, SHADOW, usePressable } from '../lib/clay';
-import { useLanguage } from '../lib/language';
+import { CLAY, SHADOW, usePressable } from '../../lib/clay';
+import { useLanguage } from '../../lib/language';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },

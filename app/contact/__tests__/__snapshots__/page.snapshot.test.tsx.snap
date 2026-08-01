@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ContactPage Snapshots matches snapshot 1`] = `
+<div>
+  <main
+    class="relative min-h-screen overflow-hidden pt-28 pb-20 px-4 sm:px-6"
+    style="background: rgb(3, 6, 15);"
+  >
+    <div
+      class="relative z-10 max-w-6xl mx-auto"
+    >
+      <div
+        data-testid="contact-header"
+      >
+        Mock Header
+      </div>
+      <div
+        data-testid="contact-info-grid"
+      >
+        Mock Info Grid
+      </div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-3 gap-8"
+      >
+        <div
+          animate="[object Object]"
+          class="lg:col-span-2"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <div
+            data-testid="contact-form"
+          >
+            Mock Form
+          </div>
+        </div>
+        <div
+          animate="[object Object]"
+          class="lg:col-span-1"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <div
+            data-testid="contact-sidebar"
+          >
+            Mock Sidebar
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+`;

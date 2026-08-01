@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import { initializeApp, getApps, getApp } from "firebase/app";
 import type { FirebaseApp } from "firebase/app";
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore";
 import type { Firestore } from "firebase/firestore";
-import type { Auth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import type { Auth, GoogleAuthProvider as GoogleAuthProviderType, GithubAuthProvider as GithubAuthProviderType } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 import type { FirebaseStorage } from "firebase/storage";
-import type { GoogleAuthProvider as GoogleAuthProviderType, GithubAuthProvider as GithubAuthProviderType } from "firebase/auth";
 
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -47,8 +47,12 @@ let storage: FirebaseStorage | null = null;
 let googleProvider: GoogleAuthProviderType | null = null;
 let githubProvider: GithubAuthProviderType | null = null;
 
+function isClientEnvironment() {
+  return typeof globalThis !== 'undefined' && typeof globalThis.window !== 'undefined' && typeof globalThis.document !== 'undefined';
+}
+
 function initializeClientFirebase() {
-  if (app) {
+  if (app || !isClientEnvironment()) {
     return;
   }
 
@@ -58,9 +62,6 @@ function initializeClientFirebase() {
   }
 
   app = firebaseApp;
-
-  const { getAuth, GoogleAuthProvider, GithubAuthProvider } = require('firebase/auth') as typeof import('firebase/auth');
-  const { getStorage } = require('firebase/storage') as typeof import('firebase/storage');
 
   auth = getAuth(firebaseApp);
   db = initializeFirestore(firebaseApp, {
@@ -79,6 +80,40 @@ function initializeClientFirebase() {
   });
 }
 
-initializeClientFirebase();
+if (isClientEnvironment()) {
+  initializeClientFirebase();
+}
+
+export function getFirebaseAuth() {
+  if (!auth && isClientEnvironment()) {
+    initializeClientFirebase();
+  }
+
+  return auth;
+}
+
+export function getFirebaseDb() {
+  if (!db && isClientEnvironment()) {
+    initializeClientFirebase();
+  }
+
+  return db;
+}
+
+export function getFirebaseStorage() {
+  if (!storage && isClientEnvironment()) {
+    initializeClientFirebase();
+  }
+
+  return storage;
+}
+
+export function getFirebaseProviders() {
+  if ((!googleProvider || !githubProvider) && isClientEnvironment()) {
+    initializeClientFirebase();
+  }
+
+  return { googleProvider, githubProvider };
+}
 
 export { auth, db, storage, googleProvider, githubProvider };

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { auth } from '../lib/firebase';
+import { auth } from '../../lib/firebase';
 import { signOut } from 'firebase/auth';
 import Image from 'next/image';
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion';
@@ -16,10 +16,10 @@ import {
   FaGlobe,
   FaUserShield,
 } from 'react-icons/fa';
-import { useAuth } from '../lib/useAuth';
-import { CLAY, SHADOW, usePressable } from '../lib/clay';
+import { useAuth } from '../../lib/useAuth';
+import { CLAY, SHADOW, usePressable } from '../../lib/clay';
 import type { User } from 'firebase/auth';
-import { useLanguage } from '../lib/language';
+import { useLanguage } from '../../lib/language';
 
 interface NavItem {
   href: string;
